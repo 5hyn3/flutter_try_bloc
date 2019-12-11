@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Provider<CounterBloc>(
-          builder: (context) => CounterBloc(),
+          create: (context) => CounterBloc(),
           dispose: (context, bloc) => bloc.dispose(),
           child: MyHomePage(title: 'Flutter Demo Home Page'),
         ));
