@@ -1,11 +1,11 @@
-import 'dart:async';
+import 'package:rxdart/rxdart.dart';
 
 class CounterBloc {
-  final _actionController = StreamController<void>();
+  final _actionController = PublishSubject<void>();
   Sink<void> get increment => _actionController.sink;
 
-  final _countController = StreamController<int>();
-  Stream<int> get count => _countController.stream;
+  final _countController = BehaviorSubject<int>.seeded(0);
+  ValueObservable<int> get count => _countController;
 
   int _count = 0;
 
