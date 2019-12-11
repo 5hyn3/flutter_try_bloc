@@ -7,15 +7,10 @@ class CounterBloc {
   final _countController = BehaviorSubject<int>.seeded(0);
   ValueObservable<int> get count => _countController;
 
-  int _count = 0;
-
   CounterBloc() {
-    _actionController.stream.listen(_handler);
-  }
-
-  void _handler(data) {
-    _count++;
-    _countController.sink.add(_count);
+    _actionController
+        .scan<int>((sum, _v, _i) => sum + 1, 0)
+        .pipe(_countController);
   }
 
   void dispose() {
